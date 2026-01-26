@@ -96,22 +96,9 @@ If you want to modify the extension:
    - Click the refresh icon on the extension card
    - Hard refresh ChatGPT page (Ctrl+Shift+R or Cmd+Shift+R)
 
-## Troubleshooting
 
-**Extension not appearing?**
-- Make sure you're on a ChatGPT page (chatgpt.com/g/* or chatgpt.com/c/*)
-- Check the browser console (F12) for any errors
-- Try reloading the extension from chrome://extensions
+### Note
+If you're facing trouble with anything, kindly contact me or raise an issue in Github. currently I'm testing it. any kind of feedback is valuable. Cheers!!
 
-**Questions not showing up?**
-- Verify the sidebar is visible (look for ☰ button if hidden)
-- Check if questions have the correct DOM structure
-- Open browser console to see any warnings
-
-**Sidebar looks broken?**
-- Make sure `style.css` is being loaded
-- Check manifest.json includes the CSS file
-
----
 
 Thanks for testing! Your feedback helps make this better.
