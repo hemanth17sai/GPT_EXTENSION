@@ -4,11 +4,11 @@
   "version": "0.1",
   "description": "Shows questions in a sidebar",
 
-   "content_scripts": [
+  "content_scripts": [
     {
       "matches": ["https://chatgpt.com/g/*", "https://chatgpt.com/c/*"],
       "js": ["dist/main.js"],
-      "type": "module",
+      "css": ["style.css"],
       "run_at": "document_idle"
     }
   ]
