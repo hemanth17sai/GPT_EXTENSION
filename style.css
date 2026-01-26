@@ -1,0 +1,90 @@
+#cgpt-q-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 280px;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--gray-50, #f9fafb);
+  border-left: 1px solid rgba(0,0,0,0.08);
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  color: var(--gray-900, #111827);
+}
+
+@media (prefers-color-scheme: dark) {
+  #cgpt-q-sidebar {
+    background: #1f2937;
+    color: #e5e7eb;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+}
+
+/* Header */
+#cgpt-q-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 14px;
+
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+#cgpt-q-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: inherit;
+}
+
+/* Scrollable list */
+#cgpt-q-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+/* Question item */
+.cgpt-q-item {
+  padding: 8px 10px;
+  margin-bottom: 6px;
+
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+
+  border-radius: 8px;
+  background: rgba(0,0,0,0.04);
+}
+
+.cgpt-q-item:hover {
+  background: rgba(0,0,0,0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .cgpt-q-item {
+    background: rgba(255,255,255,0.06);
+  }
+
+  .cgpt-q-item:hover {
+    background: rgba(255,255,255,0.1);
+  }
+}
+
+/* Resizer */
+#cgpt-q-resizer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  cursor: ew-resize;
+}

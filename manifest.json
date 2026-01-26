@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Question Sidebar (Dev)",
+  "version": "0.1",
+  "description": "Shows questions in a sidebar",
+
+   "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/g/*", "https://chatgpt.com/c/*"],
+      "js": ["dist/main.js"],
+      "type": "module",
+      "run_at": "document_idle"
+    }
+  ]
+}
