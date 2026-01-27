@@ -35,9 +35,11 @@ Since this is a local development extension, follow these steps:
 ## Usage
 
 1. **Open ChatGPT**
+   - Go to https://chatgpt.com/g/* or https://chatgpt.com/c/*
+
 2. **Start chatting**
    - Ask questions as you normally would
-   - Your questions will automatically appear in the sidebar on the right or look for a hamburger icon and press it.
+   - Your questions will automatically appear in the sidebar on the right
 
 3. **Navigate**
    - Click any question in the sidebar to jump to that part of the conversation
@@ -60,11 +62,12 @@ I'd love to hear your thoughts! Please share:
 
 You can send feedback via:
 - [Create an issue on GitHub] (if applicable)
-- Direct message, you have my number 😉
+- Direct message/email
+- Share screenshots of any issues
 
 ## Known Limitations
 
-- Only works on ChatGPT Desktop pages (chatgpt.com)
+- Only works on ChatGPT pages (chatgpt.com)
 - Sidebar resets when switching between conversations
 - Questions are extracted from the DOM, so formatting is simplified
 
@@ -74,6 +77,25 @@ You can send feedback via:
 - **Bundled with**: Custom bundler (outputs to `dist/main.js`)
 - **CSS**: Injected via content script
 - **No external dependencies**: Pure vanilla JavaScript
+
+## Development
+
+If you want to modify the extension:
+
+1. **Source files**:
+   - `main.js` - Entry point
+   - `navigation.js` - URL change detection
+   - `utils.js` - Sidebar building and DOM utilities
+   - `chatState.js` - State management
+   - `fetch.js` - Question processing
+   - `style.css` - Styling
+
+2. **After making changes**:
+   - Rebuild `dist/main.js` (if using a bundler)
+   - Go to `chrome://extensions`
+   - Click the refresh icon on the extension card
+   - Hard refresh ChatGPT page (Ctrl+Shift+R or Cmd+Shift+R)
+
 
 ### Note
 If you're facing trouble with anything, kindly contact me or raise an issue in Github. currently I'm testing it. any kind of feedback is valuable. Cheers!!
