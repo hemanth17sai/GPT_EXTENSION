@@ -38,7 +38,7 @@ export function setSideBar(newSideBar) {
 }
 
 export function clearSideBar() {
-  //   sideBar.innerHTML = "";
+  sideBar.innerHTML = "";
   //   clearQuestions();
   //   refreshSideBar(sideBar);
 }

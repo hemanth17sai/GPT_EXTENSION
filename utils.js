@@ -7,7 +7,7 @@ import {
 } from "./chatState";
 import { processQuestion, scanExistingQuestions } from "./fetch.js";
 
-export function waitForElement(timeout = 50000) {
+export function waitForElement(timeout = 5000) {
   //function waiting for the DOM to load in 50s
   return new Promise((resolve, reject) => {
     const existing = document.getElementById("prompt-textarea"); //prompt bar
@@ -40,7 +40,11 @@ function onMutations(mutations) {
         processQuestion(node); //fill this function out
       }
       const node_list = node.querySelectorAll("div.whitespace-pre-wrap");
-      node_list.forEach((q) => processQuestion(q));
+      node_list.forEach((q) => {
+        if (q.textContent != "Copy" || q.textContent != "Edit") {
+          processQuestion(q);
+        }
+      });
     }
   }
 }
@@ -101,6 +105,7 @@ function createFloatingButton() {
 
 export function refreshSideBar() {
   sidebar = getSideBar(); //gets sidebar
+  if (!sidebar) return;
   sidebar.querySelectorAll(".cgpt-q-item").forEach((e1) => e1.remove());
 }
 
