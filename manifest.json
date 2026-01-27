@@ -6,7 +6,7 @@
 
   "content_scripts": [
     {
-      "matches": ["https://chatgpt.com/g/*", "https://chatgpt.com/c/*"],
+      "matches": ["https://chatgpt.com/*"],
       "js": ["dist/main.js"],
       "css": ["style.css"],
       "run_at": "document_idle"

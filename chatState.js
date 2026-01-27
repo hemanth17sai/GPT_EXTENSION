@@ -38,7 +38,11 @@ export function setSideBar(newSideBar) {
 }
 
 export function clearSideBar() {
-  sideBar.innerHTML = "";
+  // sideBar.innerHTML = "";
+  if (!sideBar) return;
+  sideBar.querySelectorAll("div.cgpt-q-item").forEach((element) => {
+    element.remove();
+  });
   //   clearQuestions();
   //   refreshSideBar(sideBar);
 }
