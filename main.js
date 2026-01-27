@@ -5,10 +5,3 @@ import { buildNewChat } from "./utils.js";
 
 patchHistory();
 onURLChange(); // initial load
-increaseToken();
-try {
-  const token = getToken();
-  await buildNewChat(token);
-} catch (e) {
-  console.warn("error happened in main file");
-}
