@@ -38,9 +38,9 @@ export function setSideBar(newSideBar) {
 }
 
 export function clearSideBar() {
-  sideBar = null;
+  sideBar.innerHTML = "";
   //   clearQuestions();
-  refreshSideBar(sideBar);
+  //   refreshSideBar(sideBar);
 }
 
 export function getQuestions() {
@@ -59,12 +59,7 @@ export function addQuestion(question, list) {
 
 export function clearQuestions() {
   questions.length = 0;
-  try {
-    //addQuestion to sidebar
-    pushToSideBar(question, list);
-  } catch (e) {
-    console.warn("Question not being added to sidebar somehow");
-  }
+//   refreshSideBar();
 }
 export function setQuestions(newQuestions) {
   questions = [...newQuestions]; //questions is a shallowcopy of newly parsed questions.
