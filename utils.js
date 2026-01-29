@@ -41,7 +41,12 @@ function onMutations(mutations) {
       }
       const node_list = node.querySelectorAll("div.whitespace-pre-wrap");
       node_list.forEach((q) => {
-        if (q.textContent !== "Copy" && q.textContent !== "Edit") {
+        if (
+          q.textContent !== "Copy" &&
+          q.textContent !== "Edit" &&
+          q.textContent !== "Edit message" &&
+          q.textContent !== "Share"
+        ) {
           processQuestion(q);
         }
       });

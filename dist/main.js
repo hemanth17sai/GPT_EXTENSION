@@ -22,7 +22,7 @@
   }
 
   // utils.js
-  function waitForElement(timeout = 5e4) {
+  function waitForElement(timeout = 5e3) {
     return new Promise((resolve, reject) => {
       const existing = document.getElementById("prompt-textarea");
       if (existing) {
@@ -52,7 +52,11 @@
           processQuestion(node);
         }
         const node_list = node.querySelectorAll("div.whitespace-pre-wrap");
-        node_list.forEach((q) => processQuestion(q));
+        node_list.forEach((q) => {
+          if (q.textContent !== "Copy" && q.textContent !== "Edit" && q.textContent !== "Edit message" && q.textContent !== "Share") {
+            processQuestion(q);
+          }
+        });
       }
     }
   }
@@ -75,7 +79,9 @@
       if (token !== getToken()) return;
       scanExistingQuestions(token);
     } catch (e) {
-      console.warn("something went wrong in buildNewChat function in utils.js, that is " + e);
+      console.warn(
+        "something went wrong in buildNewChat function in utils.js, that is " + e
+      );
     }
   }
   function createFloatingButton() {
@@ -98,6 +104,16 @@
       btn.remove();
     };
     document.body.appendChild(btn);
+  }
+  function refreshSideBar() {
+    console.log("Inside refreshSideBar function");
+    const sidebar = getSideBar();
+    if (!sidebar) {
+      console.log("no sidebar exists to remove cgpt-q-item elemnts");
+      return;
+    }
+    sidebar.querySelectorAll(".cgpt-q-item").forEach((e1) => e1.remove());
+    console.log("removed all cgpt-q-item elements");
   }
   function enableResize(sidebar) {
     const resizer = sidebar.querySelector("#cgpt-q-resizer");
@@ -169,17 +185,29 @@
   }
   function clearObserver() {
     if (observer) {
+      console.log("Observer has cleared in clearObserver func");
       observer.disconnect();
       observer = null;
+    } else {
+      console.log("no observer present to clear in clearObserver function");
     }
+  }
+  function getSideBar() {
+    return sideBar;
   }
   function setSideBar(newSideBar) {
     sideBar = newSideBar;
   }
   function clearSideBar() {
-    if (sideBar) {
-      sideBar.innerHTML = "";
+    console.log("Inside clearSideBar function ");
+    if (!sideBar) {
+      console.log("No sidebar exists to clear");
+      return;
     }
+    sideBar.querySelectorAll("div.cgpt-q-item").forEach((element) => {
+      element.remove();
+    });
+    console.log("elements in sidebar are cleared");
   }
   function addQuestion(question, list) {
     questions.push(question);
@@ -190,36 +218,58 @@
     }
   }
   function clearQuestions() {
+    console.log("Inside clearQuestions function");
     questions.length = 0;
+    refreshSideBar();
   }
 
   // navigation.js
   var patched = false;
+  var lastUrl = location.href;
+  var pollInterval = null;
+  function startUrlPolling() {
+    if (pollInterval) return;
+    pollInterval = setInterval(() => {
+      if (location.href !== lastUrl) {
+        console.log("URL Changed:");
+        lastUrl = location.href;
+        onURLChange();
+      }
+    }, 1e3);
+  }
+  function stopUrlPolling() {
+    if (pollInterval) {
+      clearInterval(pollInterval);
+      pollInterval = null;
+    }
+  }
   function patchHistory() {
     if (patched) return;
     patched = true;
-    const originalPushState = history.pushState;
-    const originalReplaceState = history.replaceState;
-    history.pushState = function(...args) {
-      originalPushState.apply(this, args);
-      onURLChange();
-    };
-    history.replaceState = function(...args) {
-      originalReplaceState.apply(this, args);
-      onURLChange();
-    };
-    window.addEventListener("popstate", () => {
-      onURLChange();
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopUrlPolling();
+      } else {
+        lastUrl = location.href;
+        startUrlPolling();
+      }
     });
+    startUrlPolling();
   }
   async function onURLChange() {
     try {
+      console.log("URL change detected");
       increaseToken();
       const token = getToken();
+      console.log("token: ", token);
       clearObserver();
+      console.log("observer cleared");
       clearSideBar();
+      console.log("sidebar cleared");
       clearQuestions();
+      console.log("Questions cleared");
       await buildNewChat(token);
+      console.log("built a new chat");
       if (token !== getToken()) return;
     } catch (e) {
       console.warn("error happened at onURLChange function " + e);

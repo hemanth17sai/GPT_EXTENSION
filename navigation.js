@@ -12,28 +12,58 @@ import {
 import { buildNewChat } from "./utils.js";
 
 let patched = false;
+let lastUrl = location.href;
+let pollInterval = null;
+
+function startUrlPolling() {
+  if (pollInterval) return;
+  pollInterval = setInterval(() => {
+    if (location.href !== lastUrl) {
+      console.log("URL Changed:");
+      lastUrl = location.href;
+      onURLChange();
+    }
+  }, 1000);
+}
+
+function stopUrlPolling() {
+  if (pollInterval) {
+    clearInterval(pollInterval);
+    pollInterval = null;
+  }
+}
 
 export function patchHistory() {
   if (patched) return;
   patched = true;
-  //patches pushState, replaceState and popState for
-  const originalPushState = history.pushState;
-  const originalReplaceState = history.replaceState;
-
-  history.pushState = function (...args) {
-    originalPushState.apply(this, args);
-    onURLChange();
-  }; //monkey patched pushState
-
-  history.replaceState = function (...args) {
-    originalReplaceState.apply(this, args);
-    onURLChange();
-  }; //monkey patching replaceState
-
-  //listening to popstate
-  window.addEventListener("popstate", () => {
-    onURLChange();
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopUrlPolling();
+    } else {
+      lastUrl = location.href;
+      startUrlPolling();
+    }
   });
+  startUrlPolling();
+
+  //patches pushState, replaceState and popState for
+  // const originalPushState = history.pushState;
+  // const originalReplaceState = history.replaceState;
+
+  // history.pushState = function (...args) {
+  //   originalPushState.apply(this, args);
+  //   onURLChange();
+  // }; //monkey patched pushState
+
+  // history.replaceState = function (...args) {
+  //   originalReplaceState.apply(this, args);
+  //   onURLChange();
+  // }; //monkey patching replaceState
+
+  // //listening to popstate
+  // window.addEventListener("popstate", () => {
+  //   onURLChange();
+  // });
 }
 
 export async function onURLChange() {
