@@ -4,7 +4,7 @@ import {
   setSideBar,
   getQuestions,
   getSideBar,
-} from "./chatState";
+} from "./chatState.js";
 import { processQuestion, scanExistingQuestions } from "./fetch.js";
 
 export function waitForElement(timeout = 5000) {
@@ -104,9 +104,14 @@ function createFloatingButton() {
 }
 
 export function refreshSideBar() {
-  sidebar = getSideBar(); //gets sidebar
-  if (!sidebar) return;
+  console.log("Inside refreshSideBar function");
+  const sidebar = getSideBar(); //gets sidebar
+  if (!sidebar) {
+    console.log("no sidebar exists to remove cgpt-q-item elemnts");
+    return;
+  }
   sidebar.querySelectorAll(".cgpt-q-item").forEach((e1) => e1.remove());
+  console.log("removed all cgpt-q-item elements");
 }
 
 function enableResize(sidebar) {

@@ -1,4 +1,4 @@
-import { pushToSideBar, refreshSideBar } from "./utils";
+import { pushToSideBar, refreshSideBar } from "./utils.js";
 
 //we're storing the state of sideBar, questions and observers such that duplications and race conditions doesn't occur
 let observer = null;
@@ -24,8 +24,11 @@ export function setObserver(newObserver) {
 
 export function clearObserver() {
   if (observer) {
+    console.log("Observer has cleared in clearObserver func");
     observer.disconnect();
     observer = null;
+  } else {
+    console.log("no observer present to clear in clearObserver function");
   }
 }
 
@@ -39,10 +42,15 @@ export function setSideBar(newSideBar) {
 
 export function clearSideBar() {
   // sideBar.innerHTML = "";
-  if (!sideBar) return;
+  console.log("Inside clearSideBar function ");
+  if (!sideBar) {
+    console.log("No sidebar exists to clear");
+    return;
+  }
   sideBar.querySelectorAll("div.cgpt-q-item").forEach((element) => {
     element.remove();
   });
+  console.log("elements in sidebar are cleared");
   //   clearQuestions();
   //   refreshSideBar(sideBar);
 }
@@ -62,6 +70,7 @@ export function addQuestion(question, list) {
 }
 
 export function clearQuestions() {
+  console.log("Inside clearQuestions function");
   questions.length = 0;
   refreshSideBar();
 }

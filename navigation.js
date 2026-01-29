@@ -2,8 +2,14 @@
 //list of functions in this file
 //1. patchHistory
 
-import { clearObserver, clearSideBar, clearQuestions, getToken, increaseToken } from "./chatState";
-import { buildNewChat } from "./utils";
+import {
+  clearObserver,
+  clearSideBar,
+  clearQuestions,
+  getToken,
+  increaseToken,
+} from "./chatState.js";
+import { buildNewChat } from "./utils.js";
 
 let patched = false;
 
@@ -33,13 +39,19 @@ export function patchHistory() {
 export async function onURLChange() {
   //this function
   try {
+    console.log("URL change detected");
     increaseToken();
     const token = getToken();
+    console.log("token: ", token);
     clearObserver(); //clearing Observer
+    console.log("observer cleared");
     clearSideBar(); //clearing sidebar
+    console.log("sidebar cleared");
     clearQuestions(); //clearing questions data
+    console.log("Questions cleared");
     await buildNewChat(token); //goes through teh new chat Protocol for every chat.
-    if(token!==getToken()) return;
+    console.log("built a new chat");
+    if (token !== getToken()) return;
   } catch (e) {
     console.warn("error happened at onURLChange function " + e);
   }

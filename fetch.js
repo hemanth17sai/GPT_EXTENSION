@@ -1,5 +1,5 @@
-import { addQuestion,getToken } from "./chatState";
-import { pushToSideBar } from "./utils";
+import { addQuestion,getToken } from "./chatState.js";
+import { pushToSideBar } from "./utils.js";
 
 // function normalizeQuestionText
 export function processQuestion(node){
