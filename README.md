@@ -60,8 +60,7 @@ I'd love to hear your thoughts! Please share:
 
 You can send feedback via:
 
-- [Create an issue on GitHub] (if applicable)
-- Direct message, you have my number 😉
+- Create an issue on GitHub
 
 ## Known Limitations
 
@@ -78,6 +77,4 @@ You can send feedback via:
 
 ### Note
 
-If you're facing trouble with anything, kindly contact me or raise an issue in Github. currently I'm testing it. any kind of feedback is valuable. Cheers!!
-
-Thanks for testing! Your feedback helps make this better.
+If you're facing trouble with anything, kindly contact me or raise an issue in Github. any kind of feedback is valuable. Cheers!!
