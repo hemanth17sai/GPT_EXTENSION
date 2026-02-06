@@ -106,14 +106,11 @@
     document.body.appendChild(btn);
   }
   function refreshSideBar() {
-    console.log("Inside refreshSideBar function");
     const sidebar = getSideBar();
     if (!sidebar) {
-      console.log("no sidebar exists to remove cgpt-q-item elemnts");
       return;
     }
     sidebar.querySelectorAll(".cgpt-q-item").forEach((e1) => e1.remove());
-    console.log("removed all cgpt-q-item elements");
   }
   function enableResize(sidebar) {
     const resizer = sidebar.querySelector("#cgpt-q-resizer");
@@ -185,11 +182,9 @@
   }
   function clearObserver() {
     if (observer) {
-      console.log("Observer has cleared in clearObserver func");
       observer.disconnect();
       observer = null;
     } else {
-      console.log("no observer present to clear in clearObserver function");
     }
   }
   function getSideBar() {
@@ -199,15 +194,12 @@
     sideBar = newSideBar;
   }
   function clearSideBar() {
-    console.log("Inside clearSideBar function ");
     if (!sideBar) {
-      console.log("No sidebar exists to clear");
       return;
     }
     sideBar.querySelectorAll("div.cgpt-q-item").forEach((element) => {
       element.remove();
     });
-    console.log("elements in sidebar are cleared");
   }
   function addQuestion(question, list) {
     questions.push(question);
@@ -218,7 +210,6 @@
     }
   }
   function clearQuestions() {
-    console.log("Inside clearQuestions function");
     questions.length = 0;
     refreshSideBar();
   }
@@ -231,7 +222,7 @@
     if (pollInterval) return;
     pollInterval = setInterval(() => {
       if (location.href !== lastUrl) {
-        console.log("URL Changed:");
+        // console.log("URL Changed:");
         lastUrl = location.href;
         onURLChange();
       }
@@ -258,18 +249,12 @@
   }
   async function onURLChange() {
     try {
-      console.log("URL change detected");
       increaseToken();
       const token = getToken();
-      console.log("token: ", token);
       clearObserver();
-      console.log("observer cleared");
       clearSideBar();
-      console.log("sidebar cleared");
       clearQuestions();
-      console.log("Questions cleared");
       await buildNewChat(token);
-      console.log("built a new chat");
       if (token !== getToken()) return;
     } catch (e) {
       console.warn("error happened at onURLChange function " + e);

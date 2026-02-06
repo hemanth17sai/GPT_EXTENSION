@@ -109,14 +109,14 @@ function createFloatingButton() {
 }
 
 export function refreshSideBar() {
-  console.log("Inside refreshSideBar function");
+  // console.log("Inside refreshSideBar function");
   const sidebar = getSideBar(); //gets sidebar
   if (!sidebar) {
-    console.log("no sidebar exists to remove cgpt-q-item elemnts");
+    // console.log("no sidebar exists to remove cgpt-q-item elemnts");
     return;
   }
   sidebar.querySelectorAll(".cgpt-q-item").forEach((e1) => e1.remove());
-  console.log("removed all cgpt-q-item elements");
+  // console.log("removed all cgpt-q-item elements");
 }
 
 function enableResize(sidebar) {

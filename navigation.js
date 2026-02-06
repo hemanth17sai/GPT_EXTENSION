@@ -69,18 +69,18 @@ export function patchHistory() {
 export async function onURLChange() {
   //this function
   try {
-    console.log("URL change detected");
+    // console.log("URL change detected");
     increaseToken();
     const token = getToken();
-    console.log("token: ", token);
+    // console.log("token: ", token);
     clearObserver(); //clearing Observer
-    console.log("observer cleared");
+    // console.log("observer cleared");
     clearSideBar(); //clearing sidebar
-    console.log("sidebar cleared");
+    // console.log("sidebar cleared");
     clearQuestions(); //clearing questions data
-    console.log("Questions cleared");
+    // console.log("Questions cleared");
     await buildNewChat(token); //goes through teh new chat Protocol for every chat.
-    console.log("built a new chat");
+    // console.log("built a new chat");
     if (token !== getToken()) return;
   } catch (e) {
     console.warn("error happened at onURLChange function " + e);

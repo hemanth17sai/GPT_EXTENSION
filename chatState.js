@@ -24,11 +24,11 @@ export function setObserver(newObserver) {
 
 export function clearObserver() {
   if (observer) {
-    console.log("Observer has cleared in clearObserver func");
+    // console.log("Observer has cleared in clearObserver func");
     observer.disconnect();
     observer = null;
   } else {
-    console.log("no observer present to clear in clearObserver function");
+    // console.log("no observer present to clear in clearObserver function");
   }
 }
 
@@ -42,15 +42,15 @@ export function setSideBar(newSideBar) {
 
 export function clearSideBar() {
   // sideBar.innerHTML = "";
-  console.log("Inside clearSideBar function ");
+  // console.log("Inside clearSideBar function ");
   if (!sideBar) {
-    console.log("No sidebar exists to clear");
+    // console.log("No sidebar exists to clear");
     return;
   }
   sideBar.querySelectorAll("div.cgpt-q-item").forEach((element) => {
     element.remove();
   });
-  console.log("elements in sidebar are cleared");
+  // console.log("elements in sidebar are cleared");
   //   clearQuestions();
   //   refreshSideBar(sideBar);
 }
@@ -70,7 +70,7 @@ export function addQuestion(question, list) {
 }
 
 export function clearQuestions() {
-  console.log("Inside clearQuestions function");
+  // console.log("Inside clearQuestions function");
   questions.length = 0;
   refreshSideBar();
 }
